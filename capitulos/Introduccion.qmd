@@ -11,5 +11,3 @@ La violencia basada en género constituye una problemática social que afecta el
 La presente investigación tiene como objetivo analizar la evolución de las brechas educativas en la aceptación de la violencia de pareja en países de ingresos bajos y medios, considerando diferentes rondas de encuestas comparables. Asimismo, busca examinar cómo estos cambios se relacionan con la evolución de la desigualdad de género a nivel nacional.
 
 Para ello, se plantea utilizar información de las Encuestas Demográficas y de Salud (DHS), junto con indicadores nacionales de desigualdad de género. El estudio adoptará un enfoque cuantitativo basado en cortes transversales repetidos, lo que permitirá identificar diferencias entre grupos educativos y analizar su evolución a lo largo del tiempo, sin establecer relaciones causales.
-
-Actualmente, el proyecto se encuentra en la fase de revisión bibliográfica y evaluación de disponibilidad de datos. Su desarrollo se organizará mediante herramientas como R, Quarto y GitHub, con el propósito de garantizar la transparencia, organización y reproducibilidad del proceso de investigación.
