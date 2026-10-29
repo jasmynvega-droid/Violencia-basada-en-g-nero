@@ -1,0 +1,16 @@
+---
+title: "Introduccion"
+format: html
+Autores: Camila Gutierrez y Marisol Vega. 
+---
+
+## Introducción
+
+El presente estudio tiene como objetivo analizar cómo han evolucionado las diferencias educativas en la aceptación de la violencia de pareja entre países de ingresos bajos y medios, y cómo se relacionan con los cambios en la desigualdad de género a nivel nacional. Para ello, se propone utilizar información de las Encuestas Demográficas y de Salud (DHS), comparando rondas de encuesta que presenten información comparable entre países y años.
+
+La **variable dependiente** será la aceptación o justificación de la violencia de pareja, medida mediante las respuestas de las personas encuestadas a preguntas sobre situaciones en las que consideran justificable que un esposo golpee a su esposa. Esta información se obtendrá de los microdatos individuales de las encuestas DHS. La codificación de esta variable se definirá después de verificar las preguntas disponibles y su comparabilidad entre las rondas seleccionadas.
+
+Las **variables independientes principales** serán el nivel educativo de las personas encuestadas y un indicador nacional de desigualdad de género. El nivel educativo se obtendrá de los archivos individuales de las encuestas DHS, mientras que el indicador de desigualdad de género se recopilará de una fuente externa y se vinculará con los datos según el país y el año correspondiente. Además, se considerarán como variables de control la edad y el área de residencia urbana o rural, siempre que estén disponibles y sean comparables en las encuestas seleccionadas.
+
+La información se organizará por país y año de encuesta, utilizando datos de diferentes rondas y no un seguimiento de las mismas personas a lo largo del tiempo. La selección definitiva de países y variables dependerá de la disponibilidad y comparabilidad de los datos. El análisis permitirá estudiar asociaciones entre la educación, la desigualdad de género y la aceptación de la violencia de pareja, sin establecer relaciones causales.
+
