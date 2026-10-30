@@ -1,9 +1,8 @@
-# Preface {.unnumbered}
+---
+title: "Violencia basada en género"
+author: "Camila Gutierrez y Marisol Vega"
+---
 
-This is a Quarto book.
+# Violencia basada en género
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-```{r}
-1 + 1
-```
+Este libro aborda el análisis de la violencia basada en género y las diferencias educativas en la aceptación de la violencia de pareja.
