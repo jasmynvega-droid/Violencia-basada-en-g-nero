@@ -1,0 +1,116 @@
+
+# Diagnóstico territorial 
+
+El diagnóstico territorial permite analizar la distribución geográfica de los estudiantes encuestados de la Universidad Nacional de Loja, con el propósito de identificar posibles diferencias en las actitudes frente a la violencia basada en género según su procedencia o lugar de residencia. Este análisis resulta importante porque las características sociales, culturales y económicas de cada territorio pueden influir en las percepciones y experiencias de la población estudiantil.
+
+## Distribución territorial de los estudiantes según región de origen
+
+El diagnóstico territorial permite identificar la procedencia geográfica de los estudiantes encuestados de la Universidad Nacional de Loja y analizar las diferencias en su distribución según la región y zona de origen. Esta información contribuye a contextualizar las características territoriales de la población universitaria y constituye una base para examinar posteriormente las actitudes frente a la violencia basada en género.
+
+```{r}
+#| label: setup-territorial
+#| include: false
+
+library(haven)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(scales)
+
+ruta <- "C:/Users/Leander Gualan/OneDrive/Desktop/Git_hub/Violencia basada en género/datos/originales/V9_VBG_IES_5_UNL.sav"
+
+base <- read_sav(ruta)
+```
+
+```{r}
+#| label: fig-region-origen
+#| fig-cap: "Distribución porcentual de estudiantes según región de origen"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 5
+
+tabla_region <- base %>%
+  mutate(Region = haven::as_factor(REG_ORIG_18)) %>%
+  filter(!is.na(Region)) %>%
+  count(Region, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(100 * Frecuencia / sum(Frecuencia), 2)
+  )
+
+ggplot(tabla_region,
+       aes(x = reorder(Region, Porcentaje),
+           y = Porcentaje)) +
+  geom_col(fill = "#3978B5", width = 0.65) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    hjust = -0.15,
+    size = 4
+  ) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, max(tabla_region$Porcentaje) * 1.2)
+  ) +
+  labs(
+    x = "Región de origen",
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal()
+```
+
+Los resultados muestran que el 74,93 % de los estudiantes encuestados proviene de la región Sierra, seguida de la Costa con el 14,46 % y la Amazonía con el 8,82 %. En menor proporción se encuentran los estudiantes procedentes de otros países (1,65 %) y Galápagos (0,14 %). Esta distribución evidencia una marcada concentración de estudiantes de la Sierra, lo cual puede relacionarse con la ubicación geográfica de la Universidad Nacional de Loja y su cercanía con las provincias de esta región. Sin embargo, la presencia de estudiantes de otras regiones refleja la diversidad territorial de la población universitaria, aspecto importante para comprender los diferentes contextos sociales y culturales en los que se desarrollan las percepciones sobre la violencia basada en género.
+
+## Distribución de los estudiantes según zona de origen
+
+La distribución de los estudiantes según su zona de origen permite identificar la participación de la población procedente de áreas urbanas y rurales. Esta diferenciación resulta importante para comprender la diversidad territorial de la comunidad universitaria, considerando que las condiciones sociales, económicas y culturales pueden variar entre ambos espacios e influir en las percepciones sobre la violencia basada en género.
+
+```{r}
+#| label: fig-zona-origen
+#| fig-cap: "Distribución porcentual de los estudiantes según zona de origen"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 4.5
+
+tabla_zona <- base %>%
+  mutate(
+    Zona = haven::as_factor(ZONA_ORIG_19)
+  ) %>%
+  filter(!is.na(Zona)) %>%
+  count(Zona, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(
+      100 * Frecuencia / sum(Frecuencia), 2
+    )
+  )
+
+ggplot(
+  tabla_zona,
+  aes(x = Zona, y = Porcentaje, fill = Zona)
+) +
+  geom_col(width = 0.6) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    vjust = -0.4,
+    size = 4
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(tabla_zona$Porcentaje) * 1.15)
+  ) +
+  labs(
+    x = "Zona de origen",
+    y = "Porcentaje (%)"
+  ) +
+  scale_fill_manual(
+    values = c("#3978B5", "#65B7A6")
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(size = 11)
+  )
+```
+
+Los resultados muestran que el 62,67 % de los estudiantes encuestados proviene de zonas urbanas, mientras que el 37,33 % procede de zonas rurales, evidenciando una mayor participación de estudiantes de origen urbano, con una diferencia de 25,34 puntos porcentuales. Esta distribución puede relacionarse con las mayores oportunidades de acceso a la educación superior que generalmente existen en las ciudades, debido a la disponibilidad de instituciones educativas, transporte y servicios. Sin embargo, la participación de estudiantes rurales también es significativa, lo que refleja la diversidad territorial de la población universitaria y la importancia de considerar ambos contextos al analizar las percepciones sobre la violencia basada en género.

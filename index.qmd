@@ -1,6 +1,13 @@
 ---
-title: "Violencia basada en género"
-author: "Camila Gutierrez y Marisol Vega"
+title: "Presentación"
 ---
 
-# 
+## Sobre la investigación {.unnumbered}
+
+La presente investigación tiene como finalidad analizar las actitudes frente a la violencia basada en género en los estudiantes de la Universidad Nacional de Loja, considerando sus características académicas, sociales y territoriales. Para ello, se utiliza una base de datos proveniente de una encuesta estudiantil que contiene 1.452 registros, lo que permite desarrollar un diagnóstico sectorial y territorial de las percepciones de los encuestados.
+
+El estudio combina un análisis descriptivo con herramientas estadísticas, como la prueba chi-cuadrado de independencia, para examinar posibles asociaciones entre las actitudes frente a la violencia basada en género y variables como el nivel de avance académico, el sexo y la zona de origen. De esta manera, se busca aportar evidencia que contribuya a comprender las percepciones estudiantiles y sirva como referencia para fortalecer las estrategias de sensibilización y prevención de la violencia basada en género en el ámbito universitario.
+
+## Autores {.unnumbered}
+
+Camila Gutiérrez y Marisol Vega.

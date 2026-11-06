@@ -1,0 +1,574 @@
+# Diagnóstico sectorial
+
+## Caracterización de la población encuestada
+
+El diagnóstico sectorial tiene como finalidad describir las principales características sociodemográficas y académicas de las personas encuestadas en la Universidad Nacional de Loja, así como examinar sus percepciones frente a la violencia basada en género. Para ello, se utiliza una base de datos que contiene 1.452 registros y 122 variables, de las cuales se seleccionaron aquellas relacionadas con el sexo, la edad, la situación laboral, la clase social, la facultad, el nivel de avance académico y las actitudes frente a la violencia basada en género.
+
+A partir de esta información, se realiza un análisis descriptivo mediante tablas de frecuencias, porcentajes y representaciones gráficas, con el propósito de identificar las características predominantes de la población encuestada y explorar posibles diferencias en sus percepciones. Este diagnóstico constituye una base para comprender cómo se distribuyen las actitudes frente a la violencia basada en género entre los distintos grupos de estudiantes, sin establecer relaciones de causalidad.
+
+## Distribución de la población encuestada por sexo y edad
+
+El análisis de las características sociodemográficas de la población encuestada permite conocer la composición de los participantes y establecer un contexto para el estudio de las actitudes frente a la violencia basada en género. En este sentido, se consideran dos variables fundamentales: el sexo y la edad, debido a que ambas permiten identificar diferencias en la estructura de la población universitaria y posteriormente explorar posibles variaciones en las percepciones de los estudiantes.
+
+A partir de la información recopilada en la Universidad Nacional de Loja, se examina la distribución de los participantes según el sexo declarado y los grupos de edad. Para ello, se utilizan frecuencias absolutas y relativas, acompañadas de representaciones gráficas que facilitan la interpretación de los resultados.
+
+```{r}
+#| label: setup-diagnostico
+#| include: false
+
+library(haven)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+
+# Cargar la base de datos
+ruta <- "C:/Users/Leander Gualan/OneDrive/Desktop/Git_hub/Violencia basada en género/datos/originales/V9_VBG_IES_5_UNL.sav"
+
+base <- read_sav(ruta)
+```
+
+```{r}
+#| label: datos-edad
+#| include: false
+
+tabla_edad <- base %>%
+  mutate(
+    Edad = as.numeric(EDAD),
+    Grupo_edad = case_when(
+      Edad < 18 ~ "Menores de 18 años",
+      Edad >= 18 & Edad <= 20 ~ "18 a 20 años",
+      Edad >= 21 & Edad <= 23 ~ "21 a 23 años",
+      Edad >= 24 & Edad <= 26 ~ "24 a 26 años",
+      Edad >= 27 ~ "27 años o más",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(Grupo_edad)) %>%
+  count(Grupo_edad, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(
+      100 * Frecuencia / sum(Frecuencia), 2
+    )
+  )
+
+tabla_edad$Grupo_edad <- factor(
+  tabla_edad$Grupo_edad,
+  levels = c(
+    "Menores de 18 años",
+    "18 a 20 años",
+    "21 a 23 años",
+    "24 a 26 años",
+    "27 años o más"
+  )
+)
+
+tabla_edad <- arrange(tabla_edad, Grupo_edad)
+```
+
+```{r}
+#| label: datos-sexo
+#| include: false
+
+tabla_sexo <- base %>%
+  mutate(Sexo = haven::as_factor(SEXO_13)) %>%
+  filter(!is.na(Sexo)) %>%
+  count(Sexo, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(
+      100 * Frecuencia / sum(Frecuencia), 2
+    )
+  )
+```
+
+```{r}
+#| label: fig-distribucion-sexo
+#| fig-cap: "Distribución porcentual de la población encuestada según sexo"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 4.5
+
+ggplot(tabla_sexo, aes(x = Sexo, y = Porcentaje, fill = Sexo)) +
+  geom_col(width = 0.6) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    vjust = -0.4,
+    size = 4
+  ) +
+  labs(
+    x = "Sexo",
+    y = "Porcentaje (%)"
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(tabla_sexo$Porcentaje) * 1.15)
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.caption = element_text(hjust = 0)
+  )
+```
+
+Los resultados muestran una mayor participación de mujeres (64,74 %), seguidas de los hombres (35,19 %) y las personas intersexuales (0,07 %). Esta diferencia evidencia una mayor representación femenina en la muestra, aspecto importante al analizar las percepciones sobre la violencia basada en género, aunque no permite establecer diferencias en las actitudes de rechazo sin comparar las respuestas de cada grupo.
+
+```{r}
+#| label: fig-grupos-edad
+#| fig-cap: "Distribución porcentual de los encuestados por grupos de edad"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 4.5
+
+ggplot(tabla_edad,
+       aes(x = Grupo_edad, y = Porcentaje)) +
+  geom_col(fill = "#3978B5", width = 0.65) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    vjust = -0.4,
+    size = 3.5
+  ) +
+  labs(
+    x = "Grupos de edad",
+    y = "Porcentaje (%)"
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(tabla_edad$Porcentaje) * 1.15)
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 25,
+      hjust = 1
+    )
+  )
+```
+
+Los resultados muestran que la mayor proporción de encuestados se concentra entre los 21 y 23 años (38,57 %), seguida del grupo de 18 a 20 años (24,38 %) y de 27 años o más (22,59 %). En menor proporción se encuentran los estudiantes de 24 a 26 años (13,02 %) y los menores de 18 años (1,45 %). Esto evidencia que la muestra está conformada principalmente por jóvenes universitarios, aspecto relevante para analizar sus percepciones frente a la violencia basada en género.
+
+## Características académicas de la población encuestada
+
+El análisis de las características académicas permite identificar cómo se distribuyen los estudiantes encuestados según la facultad a la que pertenecen y su nivel de avance en la formación universitaria. Estas variables son relevantes para la investigación, ya que permiten conocer la composición académica de la muestra y posteriormente examinar posibles diferencias en las actitudes frente a la violencia basada en género, considerando las distintas etapas de formación de los estudiantes.
+
+```{r}
+#| label: tbl-distribucion-facultad
+#| tbl-cap: "Distribución de los encuestados según facultad"
+#| echo: false
+#| warning: false
+#| message: false
+#| include: false
+
+tabla_facultad <- base %>%
+  mutate(Facultad = haven::as_factor(FACULTAD_4)) %>%
+  filter(!is.na(Facultad)) %>%
+  count(Facultad, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(100 * Frecuencia / sum(Frecuencia), 2)
+  ) %>%
+  arrange(desc(Frecuencia))
+
+knitr::kable(
+  tabla_facultad,
+  col.names = c("Facultad", "Frecuencia", "Porcentaje (%)"),
+  align = c("l", "c", "c"),
+  booktabs = TRUE
+)
+```
+
+```{r}
+#| label: fig-distribucion-facultad
+#| fig-cap: "Distribución porcentual de los encuestados según facultad"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 5.5
+
+ggplot(
+  tabla_facultad,
+  aes(
+    x = reorder(Facultad, Porcentaje),
+    y = Porcentaje
+  )
+) +
+  geom_col(fill = "#3978B5", width = 0.65) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    hjust = -0.15,
+    size = 3.5
+  ) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, max(tabla_facultad$Porcentaje) * 1.2)
+  ) +
+  labs(
+    x = "Facultad",
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal()
+```
+
+Los resultados muestran que la mayor proporción de encuestados pertenece a la facultad FJSA (36,64 %), seguida de FEAC (15,43 %) y UED (14,46 %). Por su parte, FARNR (13,22 %) y FSH (12,40 %) presentan una participación intermedia, mientras que FEIRNNR registra el menor porcentaje (7,85 %). Esta distribución evidencia una participación desigual entre las facultades, aspecto importante al analizar las percepciones sobre la violencia basada en género, debido a que algunas áreas académicas tienen mayor representación en la muestra.
+
+```{r}
+#| label: tbl-nivel-academico
+#| tbl-cap: "Distribución de los encuestados según nivel de avance académico"
+#| echo: false
+#| warning: false
+#| message: false
+#| include: false
+
+tabla_nivel <- base %>%
+  mutate(
+    Nivel = haven::as_factor(NIVEL_SEMSTRE)
+  ) %>%
+  filter(!is.na(Nivel)) %>%
+  count(Nivel, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(100 * Frecuencia / sum(Frecuencia), 2)
+  )
+
+knitr::kable(
+  tabla_nivel,
+  col.names = c(
+    "Nivel académico",
+    "Frecuencia",
+    "Porcentaje (%)"
+  ),
+  align = c("l", "c", "c"),
+  booktabs = TRUE
+)
+```
+
+```{r}
+#| label: fig-nivel-academico
+#| fig-cap: "Distribución porcentual según nivel de avance académico"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 4.5
+
+ggplot(
+  tabla_nivel,
+  aes(x = Nivel, y = Porcentaje)
+) +
+  geom_col(
+    fill = "#3978B5",
+    width = 0.6
+  ) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    vjust = -0.4,
+    size = 4
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(tabla_nivel$Porcentaje) * 1.15)
+  ) +
+  labs(
+    x = "Nivel de avance académico",
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal()
+```
+
+Los resultados muestran una distribución relativamente equilibrada de los estudiantes según su nivel de avance académico, con una mayor participación del nivel final (34,81 %), seguido del intermedio (33,56 %) y el inicial (31,62 %). Estas diferencias son reducidas, lo que permite contar con una representación similar de los tres grupos y facilita la comparación de sus percepciones frente a la violencia basada en género a lo largo de su formación universitaria.
+
+### Condiciones socioeconómicas de la población encuestada
+
+El análisis de las condiciones socioeconómicas permite conocer la situación laboral y la clase social autopercibida de los estudiantes encuestados. Estas características son relevantes para contextualizar las diferencias económicas y sociales presentes en la población universitaria y posteriormente examinar su posible relación con las actitudes frente a la violencia basada en género.
+
+```{r}
+#| label: tbl-situacion-laboral
+#| tbl-cap: "Distribución de los encuestados según situación laboral"
+#| echo: false
+#| warning: false
+#| message: false
+#| include: false
+
+tabla_laboral <- base %>%
+  mutate(
+    Situacion_laboral = haven::as_factor(TRAB_EST_9)
+  ) %>%
+  filter(!is.na(Situacion_laboral)) %>%
+  count(Situacion_laboral, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(
+      100 * Frecuencia / sum(Frecuencia), 2
+    )
+  ) %>%
+  arrange(desc(Frecuencia))
+
+knitr::kable(
+  tabla_laboral,
+  col.names = c(
+    "Situación laboral",
+    "Frecuencia",
+    "Porcentaje (%)"
+  ),
+  booktabs = TRUE
+)
+```
+
+```{r}
+#| label: fig-situacion-laboral
+#| fig-cap: "Distribución porcentual según situación laboral"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 5
+
+ggplot(
+  tabla_laboral,
+  aes(
+    x = reorder(Situacion_laboral, Porcentaje),
+    y = Porcentaje
+  )
+) +
+  geom_col(
+    fill = "#3978B5",
+    width = 0.65
+  ) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    hjust = -0.15,
+    size = 3.5
+  ) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, max(tabla_laboral$Porcentaje) * 1.2)
+  ) +
+  labs(
+    x = "Situación laboral",
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal()
+```
+
+Los resultados muestran que el 51,17 % de los encuestados se dedica únicamente a estudiar, mientras que el 19,83 % estudia y trabaja para cubrir gastos menores. Por otro lado, el 18,11 % combina sus estudios con el trabajo para financiar su educación y mantener a su familia, y el 10,88 % trabaja para cubrir gastos académicos. Esto evidencia que, aunque predomina la dedicación exclusiva al estudio, una proporción importante de estudiantes enfrenta responsabilidades económicas adicionales, lo que refleja distintas condiciones socioeconómicas dentro de la población universitaria.
+
+```{r}
+#| label: tbl-clase-social
+#| tbl-cap: "Distribución de los encuestados según clase social autopercibida"
+#| echo: false
+#| warning: false
+#| message: false
+#| include: false
+
+tabla_clase <- base %>%
+  mutate(
+    Clase_social = haven::as_factor(CLASE_SOCIAL_17)
+  ) %>%
+  filter(!is.na(Clase_social)) %>%
+  count(Clase_social, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(
+      100 * Frecuencia / sum(Frecuencia), 2
+    )
+  ) %>%
+  arrange(desc(Frecuencia))
+
+knitr::kable(
+  tabla_clase,
+  col.names = c(
+    "Clase social",
+    "Frecuencia",
+    "Porcentaje (%)"
+  ),
+  booktabs = TRUE
+)
+```
+
+```{r}
+#| label: fig-clase-social
+#| fig-cap: "Distribución porcentual según clase social autopercibida"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 4.5
+
+ggplot(
+  tabla_clase,
+  aes(
+    x = reorder(Clase_social, Porcentaje),
+    y = Porcentaje
+  )
+) +
+  geom_col(
+    fill = "#3978B5",
+    width = 0.65
+  ) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    hjust = -0.15,
+    size = 3.5
+  ) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, max(tabla_clase$Porcentaje) * 1.2)
+  ) +
+  labs(
+    x = "Clase social autopercibida",
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal()
+```
+
+Los resultados muestran que la mayoría de los encuestados se identifica con la clase media (43,53 %), seguida de la clase media-baja (40,77 %). En menor proporción se encuentran quienes se consideran de clase baja (12,67 %) y media-alta (3,03 %). Esto evidencia que predominan los estudiantes que se perciben dentro de los estratos medios y medios-bajos, lo que refleja diferencias en las condiciones socioeconómicas de la población universitaria y constituye un aspecto relevante para analizar sus percepciones frente a la violencia basada en género.
+
+## Actitudes frente a la violencia basada en género
+
+El análisis de las actitudes frente a la violencia basada en género permite conocer las percepciones de los estudiantes de la Universidad Nacional de Loja respecto al rechazo de estas conductas. Para ello, se utiliza la variable la violencia basada en género es inaceptable, que recoge cinco categorías de respuesta. Su distribución permite identificar las posturas predominantes entre los encuestados y constituye un punto de partida para examinar posteriormente las diferencias según el nivel de avance académico y las características sociodemográficas.
+
+```{r}
+#| label: tbl-actitudes-vbg
+#| tbl-cap: "Distribución de las actitudes frente a la violencia basada en género"
+#| echo: false
+#| warning: false
+#| message: false
+#| include: false
+
+tabla_vbg <- base %>%
+  mutate(
+    Actitud = haven::as_factor(VBG_INACEPT_B1_5)
+  ) %>%
+  filter(!is.na(Actitud)) %>%
+  count(Actitud, name = "Frecuencia") %>%
+  mutate(
+    Porcentaje = round(
+      100 * Frecuencia / sum(Frecuencia), 2
+    )
+  )
+
+knitr::kable(
+  tabla_vbg,
+  col.names = c(
+    "Actitud frente a la VBG",
+    "Frecuencia",
+    "Porcentaje (%)"
+  ),
+  align = c("l", "c", "c"),
+  booktabs = TRUE
+)
+```
+
+```{r}
+#| label: fig-actitudes-vbg
+#| fig-cap: "Distribución porcentual de las actitudes frente a la violencia basada en género"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 5
+
+ggplot(
+  tabla_vbg,
+  aes(
+    x = reorder(Actitud, Porcentaje),
+    y = Porcentaje
+  )
+) +
+  geom_col(
+    fill = "#3978B5",
+    width = 0.65
+  ) +
+  geom_text(
+    aes(label = paste0(Porcentaje, "%")),
+    hjust = -0.15,
+    size = 3.5
+  ) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, max(tabla_vbg$Porcentaje) * 1.2)
+  ) +
+  labs(
+    x = "Actitudes frente a la VBG",
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 9)
+  )
+```
+
+Los resultados muestran que el 76,79 % de los encuestados seleccionó la categoría 5 respecto a la afirmación «La violencia basada en género es inaceptable», seguido del 9,57 % en la categoría 4. En contraste, las categorías 1, 2 y 3 presentan porcentajes menores. Esto evidencia una marcada concentración de respuestas en los valores superiores de la escala, lo que podría reflejar una actitud de rechazo hacia la violencia basada en género, siempre que estos valores representen un mayor grado de acuerdo con la afirmación.
+
+## Actitudes frente a la violencia basada en género según el nivel de avance académico
+
+El análisis de las actitudes frente a la violencia basada en género según el nivel de avance académico permite identificar posibles diferencias en las percepciones de los estudiantes a lo largo de su formación universitaria. Para ello, se comparan las respuestas de los estudiantes de nivel inicial, intermedio y final respecto a la afirmación «La violencia basada en género es inaceptable», con el propósito de determinar si existen variaciones en el grado de acuerdo entre los distintos grupos académicos.
+
+```{r}
+#| label: datos-vbg-nivel
+#| include: false
+
+datos_vbg_nivel <- base %>%
+  mutate(
+    Nivel = haven::as_factor(NIVEL_SEMSTRE),
+    Actitud = as.numeric(VBG_INACEPT_B1_5)
+  ) %>%
+  filter(
+    !is.na(Nivel),
+    !is.na(Actitud),
+    Actitud %in% 1:5
+  )
+
+tabla_vbg_nivel <- datos_vbg_nivel %>%
+  count(Nivel, Actitud, name = "Frecuencia") %>%
+  group_by(Nivel) %>%
+  mutate(
+    Porcentaje = 100 * Frecuencia / sum(Frecuencia)
+  ) %>%
+  ungroup() %>%
+  mutate(
+    Actitud = factor(
+      Actitud,
+      levels = 1:5,
+      labels = paste("Categoría", 1:5)
+    )
+  )
+```
+
+
+```{r}
+#| label: fig-vbg-nivel
+#| fig-cap: "Actitudes frente a la violencia basada en género según el nivel de avance académico"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 9
+#| fig-height: 5
+
+ggplot(
+  tabla_vbg_nivel,
+  aes(
+    x = Nivel,
+    y = Porcentaje,
+    fill = Actitud
+  )
+) +
+  geom_col(
+    position = "fill",
+    width = 0.65
+  ) +
+  scale_y_continuous(
+    labels = scales::label_percent()
+  ) +
+  labs(
+    x = "Nivel de avance académico",
+    y = "Porcentaje de estudiantes",
+    fill = "Respuesta"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(size = 10)
+  )
+```
+
+Los resultados muestran que la categoría 5 predomina en los tres niveles de avance académico, representando aproximadamente el 74 % en el nivel inicial, el 79 % en el intermedio y el 80 % en el final. Se observa un ligero incremento de esta respuesta conforme aumenta el nivel académico, mientras que las demás categorías presentan porcentajes considerablemente menores. Esto evidencia que las actitudes frente a la violencia basada en género son relativamente similares entre los estudiantes, aunque existe una mayor concentración de respuestas en la categoría 5 durante los niveles intermedio y final.
+

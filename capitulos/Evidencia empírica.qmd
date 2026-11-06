@@ -1,0 +1,133 @@
+# Evidencia emprírica
+
+```{r}
+#| label: setup-evidencia
+#| include: false
+
+library(haven)
+library(dplyr)
+library(ggplot2)
+
+ruta <- "C:/Users/Leander Gualan/OneDrive/Desktop/Git_hub/Violencia basada en género/datos/originales/V9_VBG_IES_5_UNL.sav"
+
+base <- read_sav(ruta)
+```
+
+## Objetivo del análisis
+
+El presente análisis empírico tiene como finalidad examinar la asociación entre el nivel de avance académico y las actitudes frente a la violencia basada en género en los estudiantes de la Universidad Nacional de Loja. Para ello, se utiliza la información obtenida mediante la encuesta estudiantil, considerando la percepción sobre si la violencia basada en género es inaceptable y el nivel académico de los encuestados. A través de herramientas estadísticas se busca identificar si existen diferencias significativas entre los grupos estudiados, complementando los resultados descriptivos presentados en los diagnósticos sectorial y territorial.
+
+## Muestra de análisis
+
+La base de datos utilizada contiene 1.452 registros de estudiantes de la Universidad Nacional de Loja. Para el análisis empírico se consideran las observaciones que presentan información válida tanto en la variable de actitudes frente a la violencia basada en género como en el nivel de avance académico. Esta selección permite realizar comparaciones entre los estudiantes de nivel inicial, intermedio y final, evitando que los valores faltantes afecten los cálculos estadísticos.
+
+***Hipótesis nula (H₀):*** El nivel de avance académico y las actitudes frente a la violencia basada en género son independientes.
+
+***Hipótesis alternativa (H₁):*** Existe una asociación entre el nivel de avance académico y las actitudes frente a la violencia basada en género.
+
+## Asociación general
+
+```{r}
+#| label: asociacion-general
+#| echo: false
+#| results: hide
+
+datos_empiricos <- base %>%
+  transmute(
+    Nivel = haven::as_factor(NIVEL_SEMSTRE),
+    Actitud = factor(as.numeric(VBG_INACEPT_B1_5))
+  ) %>%
+  filter(!is.na(Nivel), !is.na(Actitud))
+
+tabla <- table(
+  datos_empiricos$Nivel,
+  datos_empiricos$Actitud
+)
+
+prueba <- chisq.test(tabla)
+
+cat("Observaciones válidas:", nrow(datos_empiricos), "\n")
+print(prueba)
+print(prueba$expected)
+```
+
+Para examinar la relación entre el nivel de avance académico y las actitudes frente a la violencia basada en género, se aplicó la prueba chi-cuadrado de independencia, utilizando 1.442 observaciones válidas de estudiantes de la Universidad Nacional de Loja. Los resultados muestran un estadístico chi-cuadrado de 12,376, con 8 grados de libertad y un valor p de 0,1352. Dado que este valor es superior al nivel de significancia del 5 %, no se rechaza la hipótesis nula de independencia entre las variables. Por lo tanto, no se encuentra evidencia estadísticamente significativa de una asociación entre el nivel académico y las respuestas sobre la inaceptabilidad de la violencia basada en género. Esto sugiere que las diferencias observadas entre estudiantes de nivel inicial, intermedio y final podrían responder a variaciones muestrales y no necesariamente a una relación sistemática entre ambas variables.
+
+## Intensidad de la asociación
+
+```{r}
+#| label: intensidad-asociacion
+#| echo: false
+#| results: hide
+
+chi2 <- as.numeric(prueba$statistic)
+n <- sum(tabla)
+k <- min(nrow(tabla), ncol(tabla))
+
+V_cramer <- sqrt(chi2 / (n * (k - 1)))
+
+cat("V de Cramér:", round(V_cramer, 4))
+```
+
+El coeficiente V de Cramér presenta un valor aproximado de 0,0655, lo que indica una asociación de magnitud muy débil entre el nivel académico y las actitudes frente a la violencia basada en género. Este resultado complementa la prueba chi-cuadrado y muestra que las diferencias entre los niveles académicos son reducidas. En consecuencia, el avance en la formación universitaria no presenta una asociación estadísticamente significativa con las respuestas analizadas, aunque esto no permite descartar la influencia de otros factores personales, sociales o educativos.
+
+
+## Asociación según sexo 
+
+Para complementar el análisis empírico, se examinó la asociación entre el sexo de los estudiantes y las actitudes frente a la violencia basada en género. Se utilizaron 1.452 observaciones válidas y se aplicó inicialmente la prueba chi-cuadrado de independencia, obteniendo un estadístico de 8,5147 con 8 grados de libertad. Debido a la presencia de frecuencias esperadas reducidas en algunas categorías, se consideró necesario utilizar una simulación de Monte Carlo para evaluar la significancia estadística de la asociación. Este procedimiento permite analizar las posibles diferencias entre las respuestas de los estudiantes sin atribuirlas directamente a su sexo.
+
+```{r}
+#| label: asociacion-sexo
+#| include: false
+
+datos_sexo <- base %>%
+  transmute(
+    Sexo = haven::as_factor(SEXO_13),
+    Actitud = factor(as.numeric(VBG_INACEPT_B1_5))
+  ) %>%
+  filter(!is.na(Sexo), !is.na(Actitud))
+
+tabla_sexo <- table(
+  datos_sexo$Sexo,
+  datos_sexo$Actitud
+)
+
+set.seed(123)
+
+prueba_sexo_mc <- chisq.test(
+  tabla_sexo,
+  simulate.p.value = TRUE,
+  B = 100000
+)
+```
+
+
+## Asociación según zona de origen
+
+```{r}
+#| label: asociacion-zona
+#| include: false
+
+datos_zona <- base %>%
+  transmute(
+    Zona = haven::as_factor(ZONA_ORIG_19),
+    Actitud = factor(as.numeric(VBG_INACEPT_B1_5))
+  ) %>%
+  filter(!is.na(Zona), !is.na(Actitud))
+
+tabla_zona <- table(
+  datos_zona$Zona,
+  datos_zona$Actitud
+)
+
+prueba_zona <- chisq.test(tabla_zona)
+```
+
+Con el propósito de incorporar la dimensión territorial en el análisis empírico, se examinó la asociación entre la zona de origen de los estudiantes y sus actitudes frente a la violencia basada en género, considerando 1.452 observaciones válidas. Para ello, se aplicó la prueba chi-cuadrado de independencia, obteniendo un estadístico de 5,8352 con 4 grados de libertad y un valor p de 0,2118. Debido a que este valor supera el nivel de significancia del 5 %, no se rechaza la hipótesis nula de independencia entre las variables. Por lo tanto, no se encontró evidencia estadísticamente significativa de diferencias en la distribución de las respuestas entre estudiantes provenientes de zonas urbanas y rurales. Esto sugiere que, dentro de la muestra analizada, la zona de origen no presenta una asociación estadísticamente significativa con las actitudes frente a la violencia basada en género, aunque no se descarta la posible influencia de otros factores sociales, culturales o educativos.
+
+## Limitaciones
+Los resultados obtenidos deben interpretarse considerando algunas limitaciones metodológicas. En primer lugar, la información corresponde a una encuesta aplicada a estudiantes de la Universidad Nacional de Loja, por lo que las asociaciones identificadas no permiten establecer relaciones de causalidad. Asimismo, las actitudes frente a la violencia basada en género se analizan a partir de respuestas declaradas por los encuestados, las cuales pueden estar influenciadas por factores personales y sociales. Por otra parte, la distribución desigual de observaciones entre determinadas categorías puede afectar la precisión de las pruebas estadísticas. Finalmente, los resultados reflejan las características de la población estudiantil encuestada y no necesariamente representan las percepciones de estudiantes de otras instituciones de educación superior.
+
+## Interpretación general
+
+Los resultados de la evidencia empírica permiten complementar los diagnósticos sectorial y territorial sobre las actitudes frente a la violencia basada en género en los estudiantes de la Universidad Nacional de Loja. En relación con el nivel de avance académico, la prueba chi-cuadrado presentó un valor p de 0,1352 y el coeficiente V de Cramér alcanzó 0,0655, evidenciando una asociación de magnitud muy débil y sin significancia estadística. De igual manera, el análisis según zona de origen obtuvo un valor p de 0,2118, por lo que tampoco se identificó una asociación estadísticamente significativa entre la procedencia urbana o rural y las respuestas analizadas. Estos hallazgos sugieren que las diferencias observadas en las actitudes estudiantiles no pueden explicarse únicamente a partir del nivel académico o la zona de origen. En este sentido, resulta importante considerar otros factores personales, sociales y educativos que podrían estar relacionados con las percepciones sobre la violencia basada en género.

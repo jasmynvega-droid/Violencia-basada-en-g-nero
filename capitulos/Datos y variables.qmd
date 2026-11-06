@@ -1,0 +1,194 @@
+
+
+# Datos y variables
+
+## Fuente de información
+
+La investigación utiliza microdatos de una encuesta aplicada a la comunidad universitaria de la Universidad Nacional de Loja (UNL), orientada a identificar percepciones, actitudes y situaciones relacionadas con la violencia basada en género.
+
+La base original contiene 1.452 registros y 122 variables. El estudio se concentra en las actitudes frente a la violencia basada en género, el nivel de avance académico y las características sociodemográficas de las personas encuestadas, incluyendo sexo, edad, situación laboral y clase social.
+
+## Variables principales
+
+```{r}
+
+#| include: false
+
+library(haven)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+
+ruta <- "C:/Users/Leander Gualan/OneDrive/Desktop/Git_hub/Violencia basada en género/datos/originales/V9_VBG_IES_5_UNL.sav"
+
+base <- read_sav(ruta)
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-variables
+#| tbl-cap: "Descripción de las variables del estudio"
+
+variables <- data.frame(
+  `Tipo de variable` = c(
+    "Dependiente",
+    "Independiente",
+    "Control",
+    "Control",
+    "Control",
+    "Control",
+    "Control"
+  ),
+  Variable = c(
+    "Rechazo de la VBG",
+    "Nivel de avance académico",
+    "Edad",
+    "Sexo",
+    "Situación laboral",
+    "Clase social",
+    "Facultad"
+  ),
+  Código = c(
+    "VBG_INACEPT_B1_5",
+    "NIVEL_SEMSTRE",
+    "EDAD",
+    "SEXO_13",
+    "TRAB_EST_9",
+    "CLASE_SOCIAL_17",
+    "FACULTAD_4"
+  ),
+  Descripción = c(
+    "Percepción sobre si la violencia basada en género es inaceptable.",
+    "Clasificación del estudiante en nivel inicial, intermedio o final.",
+    "Edad de la persona encuestada.",
+    "Sexo declarado por la persona encuestada.",
+    "Condición de estudio y trabajo.",
+    "Clase social autopercibida.",
+    "Facultad o área académica a la que pertenece."
+  )
+)
+
+knitr::kable(
+  variables,
+  booktabs = TRUE,
+  align = c("l", "l", "c", "l"),
+  col.names = c(
+    "Tipo de variable",
+    "Variable",
+    "Código",
+    "Descripción"
+  )
+) %>%
+  kableExtra::kable_styling(
+    full_width = FALSE,
+    position = "center",
+    font_size = 9
+  ) %>%
+  kableExtra::row_spec(
+    0,
+    bold = TRUE
+  )
+```
+
+
+## Construcción de indicadores
+
+Para el desarrollo de la investigación se consideran dos indicadores principales: las actitudes de rechazo frente a la violencia basada en género y el nivel de avance académico de los estudiantes.
+
+La variable dependiente, correspondiente a la percepción de que la violencia basada en género es inaceptable (VBG_INACEPT_B1_5), se mide mediante una escala de cinco categorías de respuesta. Esta variable permite examinar las actitudes de los participantes frente al rechazo de la violencia basada en género.
+
+La variable independiente, correspondiente al nivel de avance académico (NIVEL_SEMSTRE), se encuentra agrupada en tres categorías: inicial, intermedio y final. Esta clasificación permite comparar las actitudes de los estudiantes según su etapa de formación universitaria.
+
+Adicionalmente, se incorporan variables de control relacionadas con las características sociodemográficas y académicas de los participantes, como la edad, el sexo, la situación laboral, la clase social y la facultad.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(knitr)
+library(dplyr)
+
+indicadores <- data.frame(
+  Indicador = c(
+    "Actitud frente a la VBG",
+    "Nivel de avance académico"
+  ),
+  Variable = c(
+    "VBG_INACEPT_B1_5",
+    "NIVEL_SEMSTRE"
+  ),
+  Categorias = c(
+    "Cinco categorías de respuesta",
+    "Inicial, intermedio y final"
+  ),
+  Observaciones_validas = c(
+    sum(!is.na(base$VBG_INACEPT_B1_5)),
+    sum(!is.na(base$NIVEL_SEMSTRE))
+  )
+)
+
+kable(
+  indicadores,
+  col.names = c(
+    "Indicador",
+    "Código",
+    "Categorías",
+    "Observaciones válidas"
+  )
+)
+```
+
+## Tratamiento de datos
+
+La base original contiene 1.452 registros correspondientes a personas encuestadas y 122 variables. Para el análisis se seleccionaron las variables relacionadas con la aceptación de la violencia basada en género, el avance académico y las características sociodemográficas de los participantes.
+
+Se realizó una revisión de los valores faltantes y de la distribución de las categorías de las variables seleccionadas, con el propósito de identificar posibles inconsistencias y determinar la disponibilidad de información para el análisis estadístico.
+
+```{r}
+#| echo: false
+#| message: false
+
+library(knitr)
+
+tabla <- data.frame(
+  Indicador = c(
+    "Registros originales",
+    "Valores faltantes en variable dependiente",
+    "Valores faltantes en variable independiente",
+    "Valores faltantes en edad",
+    "Valores faltantes en sexo",
+    "Valores faltantes en situación laboral",
+    "Valores faltantes en clase social",
+    "Valores faltantes en facultad"
+  ),
+  Observaciones = c(
+    nrow(base),
+    sum(is.na(base$VBG_INACEPT_B1_5)),
+    sum(is.na(base$NIVEL_SEMSTRE)),
+    sum(is.na(base$EDAD)),
+    sum(is.na(base$SEXO_13)),
+    sum(is.na(base$TRAB_EST_9)),
+    sum(is.na(base$CLASE_SOCIAL_17)),
+    sum(is.na(base$FACULTAD_4))
+  )
+)
+
+kable(
+  tabla,
+  align = c("l", "c")
+)
+```
+
+## Alcance de la información
+
+El análisis se concentra en estudiar la relación entre el nivel de avance académico de los estudiantes y su percepción sobre la violencia basada en género, considerando características sociodemográficas como la edad, el sexo, la situación laboral, la clase social y la facultad a la que pertenecen.
+
+El estudio tiene un alcance descriptivo y correlacional, debido a que busca identificar diferencias en las percepciones sobre la violencia basada en género según el nivel de avance académico y las características de los participantes.
+
+Los resultados permiten describir las actitudes de los estudiantes frente a la violencia basada en género e identificar posibles asociaciones entre las variables analizadas. Sin embargo, debido al carácter transversal de la información, no es posible establecer relaciones causales ni afirmar que el avance académico determine las percepciones sobre la violencia basada en género.
