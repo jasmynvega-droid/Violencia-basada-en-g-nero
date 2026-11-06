@@ -4,9 +4,11 @@
 
 ## Fuente de información
 
-La investigación utiliza microdatos de una encuesta aplicada a la comunidad universitaria de la Universidad Nacional de Loja (UNL), orientada a identificar percepciones, actitudes y situaciones relacionadas con la violencia basada en género.
+La presente investigación utiliza microdatos provenientes de una encuesta aplicada a estudiantes de la Universidad Nacional de Loja (UNL), orientada a recopilar información sobre sus características sociodemográficas, académicas y sus actitudes frente a la violencia basada en género.
 
-La base original contiene 1.452 registros y 122 variables. El estudio se concentra en las actitudes frente a la violencia basada en género, el nivel de avance académico y las características sociodemográficas de las personas encuestadas, incluyendo sexo, edad, situación laboral y clase social.
+La base de datos original contiene 1.452 registros y 122 variables, que permiten caracterizar a la población encuestada y examinar posibles asociaciones entre las actitudes frente a la violencia basada en género y determinadas características de los estudiantes. Para el desarrollo del estudio se seleccionaron las variables relacionadas con el nivel de avance académico, el sexo, la edad, la facultad, la situación laboral, la clase social autopercibida y la procedencia territorial.
+
+La información constituye una fuente de datos de corte transversal, por lo que permite analizar las características y asociaciones observadas entre las variables, sin establecer relaciones causales ni evaluar cambios individuales a lo largo del tiempo.
 
 ## Variables principales
 
@@ -98,13 +100,13 @@ knitr::kable(
 
 ## Construcción de indicadores
 
-Para el desarrollo de la investigación se consideran dos indicadores principales: las actitudes de rechazo frente a la violencia basada en género y el nivel de avance académico de los estudiantes.
+Para el desarrollo de la investigación se consideran dos variables principales: las actitudes frente a la violencia basada en género y el nivel de avance académico de los estudiantes.
 
-La variable dependiente, correspondiente a la percepción de que la violencia basada en género es inaceptable (VBG_INACEPT_B1_5), se mide mediante una escala de cinco categorías de respuesta. Esta variable permite examinar las actitudes de los participantes frente al rechazo de la violencia basada en género.
+La variable correspondiente a las actitudes frente a la violencia basada en género se obtiene mediante el ítem VBG_INACEPT_B1_5, que recoge las respuestas de los estudiantes ante la afirmación «La violencia basada en género es inaceptable». Este indicador presenta cinco categorías de respuesta, donde la categoría 5 representa el mayor grado de acuerdo con la afirmación. Por tanto, las respuestas permiten identificar diferentes niveles de aceptación o rechazo hacia la violencia basada en género.
 
-La variable independiente, correspondiente al nivel de avance académico (NIVEL_SEMSTRE), se encuentra agrupada en tres categorías: inicial, intermedio y final. Esta clasificación permite comparar las actitudes de los estudiantes según su etapa de formación universitaria.
+Por otra parte, el nivel de avance académico se identifica mediante la variable NIVEL_SEMESTRE, agrupada en tres categorías: inicial, intermedio y final. Esta clasificación permite comparar las actitudes de los estudiantes según la etapa de formación universitaria en la que se encuentran.
 
-Adicionalmente, se incorporan variables de control relacionadas con las características sociodemográficas y académicas de los participantes, como la edad, el sexo, la situación laboral, la clase social y la facultad.
+Adicionalmente, se incorporan variables sociodemográficas y socioeconómicas, como el sexo, la edad, la situación laboral, la clase social autopercibida, la facultad y la zona de origen, con el propósito de caracterizar a la población encuestada y complementar el análisis de las diferencias observadas entre los estudiantes.
 
 ```{r}
 #| echo: false
@@ -146,9 +148,13 @@ kable(
 
 ## Tratamiento de datos
 
-La base original contiene 1.452 registros correspondientes a personas encuestadas y 122 variables. Para el análisis se seleccionaron las variables relacionadas con la aceptación de la violencia basada en género, el avance académico y las características sociodemográficas de los participantes.
+La base de datos original contiene 1.452 registros correspondientes a estudiantes encuestados de la Universidad Nacional de Loja. Como parte del tratamiento de la información, se revisó la disponibilidad de las variables seleccionadas y la presencia de valores faltantes.
 
-Se realizó una revisión de los valores faltantes y de la distribución de las categorías de las variables seleccionadas, con el propósito de identificar posibles inconsistencias y determinar la disponibilidad de información para el análisis estadístico.
+La revisión permitió identificar que la variable correspondiente a las actitudes frente a la violencia basada en género cuenta con 1.452 observaciones válidas, mientras que el nivel de avance académico presenta 1.442 observaciones válidas y 10 registros sin información disponible.
+
+En consecuencia, para el análisis de asociación entre el nivel de avance académico y las actitudes frente a la violencia basada en género se utilizaron 1.442 observaciones con información disponible en ambas variables. Esta selección permite realizar las comparaciones estadísticas correspondientes sin incorporar registros incompletos en las variables principales del análisis.
+
+Posteriormente, se desarrolló un análisis descriptivo mediante tablas de frecuencias, porcentajes y representaciones gráficas. Para examinar la asociación entre las variables categóricas se aplicaron pruebas estadísticas de chi-cuadrado y se utilizó el coeficiente V de Cramér para evaluar la intensidad de la asociación observada.
 
 ```{r}
 #| echo: false
@@ -187,8 +193,10 @@ kable(
 
 ## Alcance de la información
 
-El análisis se concentra en estudiar la relación entre el nivel de avance académico de los estudiantes y su percepción sobre la violencia basada en género, considerando características sociodemográficas como la edad, el sexo, la situación laboral, la clase social y la facultad a la que pertenecen.
+La información utilizada permite caracterizar a los estudiantes encuestados de la Universidad Nacional de Loja y examinar la asociación entre el nivel de avance académico y las actitudes frente a la violencia basada en género. Asimismo, facilita la identificación de diferencias descriptivas según características sociodemográficas, académicas y territoriales.
 
-El estudio tiene un alcance descriptivo y correlacional, debido a que busca identificar diferencias en las percepciones sobre la violencia basada en género según el nivel de avance académico y las características de los participantes.
+No obstante, los resultados deben interpretarse considerando las limitaciones de la información disponible. Al tratarse de datos transversales, no es posible determinar si las actitudes de los estudiantes cambian como consecuencia de su avance académico, puesto que no se realiza un seguimiento de los mismos individuos a lo largo del tiempo.
 
-Los resultados permiten describir las actitudes de los estudiantes frente a la violencia basada en género e identificar posibles asociaciones entre las variables analizadas. Sin embargo, debido al carácter transversal de la información, no es posible establecer relaciones causales ni afirmar que el avance académico determine las percepciones sobre la violencia basada en género.
+Además, las actitudes analizadas corresponden a respuestas declaradas por los participantes ante una afirmación específica, por lo que no representan necesariamente sus comportamientos reales frente a situaciones de violencia basada en género.
+
+Por tanto, los resultados permiten identificar patrones y asociaciones dentro de la población encuestada, pero no establecer relaciones causales ni generalizar automáticamente los hallazgos a toda la población universitaria del país.

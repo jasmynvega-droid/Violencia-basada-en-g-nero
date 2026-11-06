@@ -2,70 +2,60 @@
 
 ## Contextualización del problema
 
-La violencia de pareja constituye una problemática social relacionada con las desigualdades de género y con las condiciones sociales, culturales y económicas en las que se desarrollan las relaciones entre hombres y mujeres. Su aceptación o justificación representa una dimensión relevante para comprender las normas y actitudes sociales que pueden contribuir a la persistencia de estas formas de violencia.
+La violencia basada en género constituye una problemática social que afecta las relaciones entre las personas y se encuentra vinculada con factores culturales, educativos y sociales que pueden contribuir a su aceptación, normalización o rechazo. Aunque en los últimos años se han desarrollado iniciativas orientadas a promover la igualdad de género y prevenir distintas manifestaciones de violencia, todavía persisten creencias y comportamientos que dificultan su erradicación.
 
-La educación constituye una dimensión importante para el análisis de las actitudes relacionadas con la igualdad de género. Las diferencias en el nivel educativo pueden estar asociadas con distintas formas de interpretar las relaciones de pareja, los roles de género y la aceptabilidad de la violencia en determinadas circunstancias.
+En el ámbito universitario, esta problemática adquiere especial relevancia debido a que las instituciones de educación superior no solo cumplen una función académica, sino que también constituyen espacios de interacción social y formación de valores. Durante su trayectoria universitaria, los estudiantes pueden adquirir conocimientos y experiencias que influyan en sus percepciones sobre la igualdad, el respeto y la violencia basada en género. Sin embargo, estas actitudes también están condicionadas por experiencias personales, normas sociales y características del entorno en el que se desarrollan.
 
-Sin embargo, estas diferencias no necesariamente se mantienen constantes en el tiempo ni presentan el mismo comportamiento en todos los países. Los cambios sociales, institucionales y económicos pueden relacionarse con la evolución de las actitudes hacia la violencia de pareja, mientras que las brechas educativas pueden reducirse, mantenerse o ampliarse entre distintos grupos de población.
+En este contexto, resulta importante examinar las actitudes de los estudiantes de la Universidad Nacional de Loja frente a la violencia basada en género, considerando sus características sociodemográficas y el nivel de avance académico. Este análisis permite comprender cómo se distribuyen dichas actitudes dentro de la población encuestada y evaluar si existen diferencias entre los estudiantes que se encuentran en distintas etapas de su formación universitaria.
 
-Desde esta perspectiva, resulta pertinente estudiar la evolución de las actitudes que justifican la violencia de pareja, prestando especial atención a las diferencias educativas y a su relación con los cambios en la desigualdad de género a nivel nacional.
+Por tanto, estudiar esta relación resulta pertinente para identificar patrones de aceptación o rechazo hacia la violencia basada en género y generar evidencia que contribuya a comprender esta problemática en el entorno universitario, sin asumir que el avance académico constituye por sí mismo un factor determinante de las actitudes estudiantiles.
 
 ## Planteamiento del problema
 
-A pesar de los avances en materia de igualdad de género, la justificación social de la violencia de pareja continúa siendo una dimensión relevante para comprender las desigualdades que afectan a las mujeres en diferentes contextos nacionales.
+A pesar de los avances en materia de igualdad de género y de las iniciativas orientadas a prevenir la violencia basada en género, esta problemática continúa presente en distintos espacios sociales, incluido el ámbito universitario. Si bien la educación superior constituye un espacio importante para la formación de conocimientos, valores y actitudes, no necesariamente garantiza que todos los estudiantes desarrollen las mismas percepciones frente a la violencia basada en género.
 
-Las actitudes frente a la violencia de pareja pueden presentar diferencias importantes según el nivel educativo de las personas. No obstante, analizar estas diferencias únicamente en un momento determinado no permite comprender si las brechas educativas han cambiado a lo largo del tiempo ni si su evolución ha sido similar entre países.
+En este contexto, resulta relevante analizar si el nivel de avance académico de los estudiantes se relaciona con sus actitudes de aceptación o rechazo hacia la violencia basada en género. A medida que los estudiantes avanzan en su formación universitaria, pueden estar expuestos a nuevas experiencias, conocimientos y espacios de reflexión que contribuyan a modificar sus percepciones. Sin embargo, estas actitudes también pueden estar relacionadas con factores personales, familiares, sociales y culturales, por lo que no es posible atribuir sus diferencias únicamente a la formación académica.
 
-Asimismo, los cambios en las condiciones nacionales de desigualdad de género pueden estar relacionados con la transformación de las actitudes sociales frente a la violencia. Sin embargo, esta relación puede variar entre contextos y periodos, por lo que requiere un análisis comparativo que considere tanto las diferencias individuales como las características de cada país.
+En la Universidad Nacional de Loja, la información obtenida mediante una encuesta aplicada a 1.452 estudiantes permite examinar las actitudes frente a la violencia basada en género y su relación con distintas características sociodemográficas y académicas. No obstante, es necesario determinar si existen diferencias estadísticamente significativas entre los estudiantes de los niveles inicial, intermedio y final de su formación universitaria.
 
-En este contexto, se plantea la necesidad de examinar cómo han evolucionado las brechas educativas en las actitudes que justifican la violencia de pareja entre distintas rondas de encuestas comparables y cómo dichos cambios se relacionan con la evolución de la desigualdad de género a nivel nacional.
-
-Para abordar esta problemática, la investigación propone utilizar microdatos de las Encuestas Demográficas y de Salud (DHS), específicamente archivos Individual Recode, correspondientes a países de ingresos bajos y medios que cuenten con al menos dos rondas comparables y con información armonizable sobre las actitudes frente a la violencia de pareja.
-
-La inclusión de países y periodos estará condicionada a la disponibilidad, comparabilidad y cobertura efectiva de los datos, evitando establecer una muestra definitiva antes de completar la auditoría de viabilidad.
+Por ello, la presente investigación busca analizar la asociación entre el nivel de avance académico y las actitudes frente a la violencia basada en género, considerando además las características de la población encuestada. Este análisis permitirá identificar patrones y diferencias dentro del entorno universitario, aportando evidencia que pueda contribuir a la comprensión de esta problemática y orientar futuras estrategias de sensibilización y prevención.
 
 ## Pregunta de investigación
 
-¿Cómo han evolucionado las brechas educativas en la aceptación de la violencia de pareja entre rondas comparables de encuestas, y cómo se asocian esos cambios con la evolución de la desigualdad de género a nivel nacional?
+¿Existe una asociación estadísticamente significativa entre el nivel de avance académico y las actitudes frente a la violencia basada en género en los estudiantes de la Universidad Nacional de Loja?
 
 ## Objetivo general
 
-Analizar la evolución de las brechas educativas en las actitudes que justifican la violencia de pareja en países de ingresos bajos y medios, y examinar su asociación con los cambios en la desigualdad de género a nivel nacional, mediante microdatos de rondas comparables de las Encuestas Demográficas y de Salud (DHS).
+Analizar la asociación entre el nivel de avance académico y las actitudes frente a la violencia basada en género en los estudiantes de la Universidad Nacional de Loja, mediante el análisis descriptivo y la aplicación de pruebas estadísticas, considerando sus características sociodemográficas y académicas.
 
 ## Objetivos específicos
 
-- Identificar y caracterizar los países y las rondas de encuestas DHS que cumplen los criterios de disponibilidad y comparabilidad de información sobre actitudes frente a la violencia de pareja.
+- Caracterizar a la población estudiantil encuestada según sus condiciones sociodemográficas, académicas y socioeconómicas.
 
-- Describir la distribución de las actitudes que justifican la violencia de pareja según el nivel educativo de las personas encuestadas.
+- Describir la distribución de las actitudes frente a la violencia basada en género entre los estudiantes de la Universidad Nacional de Loja.
 
-- Examinar la evolución de las brechas educativas en la aceptación de la violencia de pareja entre rondas comparables de encuestas en los países seleccionados.
+- Examinar las diferencias en las actitudes frente a la violencia basada en género según los niveles inicial, intermedio y final de avance académico.
 
-- Analizar las diferencias entre países y periodos en la evolución de las brechas educativas, considerando sus características nacionales.
+- Evaluar la asociación estadística entre el nivel de avance académico y las actitudes frente a la violencia basada en género mediante la prueba de chi-cuadrado y el coeficiente V de Cramér.
 
-- Estimar la asociación entre los cambios en las brechas educativas y la evolución de los indicadores nacionales de desigualdad de género.
+- Analizar la asociación entre las actitudes frente a la violencia basada en género y características sociodemográficas como el sexo y la zona de origen de los estudiantes.
 
 ## Justificación social e institucional
 
-La investigación se enmarca en los estudios sobre desigualdad de género, educación y actitudes sociales relacionadas con la violencia de pareja.
+La presente investigación se justifica por la importancia de comprender las actitudes frente a la violencia basada en género dentro del ámbito universitario, considerando que estas pueden reflejar la influencia de normas sociales, experiencias personales y procesos de formación académica. Analizar dichas actitudes permite reconocer diferencias entre los estudiantes y aportar información relevante para la reflexión sobre la prevención de la violencia y la promoción de relaciones basadas en el respeto y la igualdad.
 
-Su relevancia científica radica en que propone analizar no solamente las diferencias educativas en un momento determinado, sino también su evolución entre distintas rondas de encuestas y contextos nacionales. Este enfoque permite examinar si los cambios en las actitudes frente a la violencia de pareja han sido similares entre grupos educativos o si persisten diferencias en la transformación de dichas actitudes.
+Desde una perspectiva social, el estudio contribuye a comprender cómo se manifiestan las percepciones de aceptación o rechazo hacia la violencia basada en género en una población estudiantil con diferentes características sociodemográficas y académicas. Asimismo, permite examinar si el avance en la formación universitaria presenta alguna asociación con estas actitudes, reconociendo que pueden intervenir otros factores que no necesariamente se encuentran determinados por el nivel educativo.
 
-Desde una perspectiva social, el estudio puede contribuir a comprender la persistencia de normas y actitudes que justifican la violencia de pareja, así como las diferencias observadas entre grupos de población y países.
+Desde el ámbito institucional, la investigación proporciona información sobre las características y percepciones de los estudiantes de la Universidad Nacional de Loja. Los resultados pueden servir como referencia para orientar futuras actividades de sensibilización, prevención y formación relacionadas con la violencia basada en género, considerando las particularidades de la población universitaria.
 
-Adicionalmente, la incorporación de indicadores nacionales de desigualdad de género permite explorar si los cambios en el contexto de cada país se relacionan con la evolución de las brechas educativas en las actitudes estudiadas.
-
-La evidencia obtenida puede aportar elementos para la discusión académica y para la formulación de estrategias orientadas a la igualdad de género y a la prevención de la violencia de pareja.
+Finalmente, el estudio tiene relevancia académica porque utiliza información cuantitativa y herramientas estadísticas para examinar la relación entre el avance académico y las actitudes estudiantiles, contribuyendo a la generación de evidencia que puede servir como punto de partida para investigaciones posteriores.
 
 ## Alcance
 
-La investigación se concentra en países de ingresos bajos y medios que dispongan de al menos dos rondas comparables de las Encuestas Demográficas y de Salud (DHS), con información sobre actitudes que justifican la violencia de pareja y variables educativas armonizables.
+La investigación se desarrolla a partir de una encuesta aplicada a 1.452 estudiantes de la Universidad Nacional de Loja, con el propósito de analizar sus actitudes frente a la violencia basada en género y su asociación con el nivel de avance académico. El estudio considera características sociodemográficas, académicas y socioeconómicas, entre ellas el sexo, la edad, la facultad, la situación laboral, la clase social autopercibida y la zona de origen.
 
-La unidad de análisis corresponde a las personas encuestadas, agrupadas por país y periodo de encuesta. El diseño contempla cortes transversales repetidos, por lo que no se realiza seguimiento de las mismas personas a lo largo del tiempo.
+El análisis tiene un alcance descriptivo y asociativo. En primer lugar, se caracteriza a la población encuestada mediante distribuciones de frecuencias, porcentajes y representaciones gráficas. Posteriormente, se examina la relación entre el nivel de avance académico y las actitudes frente a la violencia basada en género mediante pruebas estadísticas de asociación. También se consideran las diferencias relacionadas con el sexo y la zona de origen de los estudiantes.
 
-El análisis considera las diferencias educativas en las actitudes frente a la violencia de pareja y su evolución entre rondas de encuesta. Asimismo, incorpora indicadores nacionales de desigualdad de género para examinar su asociación con los cambios observados.
+Es importante señalar que, debido al carácter transversal de la información, los resultados permiten identificar asociaciones estadísticas, pero no establecer relaciones causales ni determinar que el avance académico produce cambios en las actitudes frente a la violencia basada en género. Asimismo, los hallazgos corresponden a la población estudiada y no deben generalizarse automáticamente a otras instituciones de educación superior.
 
-La selección definitiva de países y periodos dependerá de una auditoría previa de disponibilidad, comparabilidad, tamaño muestral, presencia de los indicadores y compatibilidad temporal de la información.
-
-El estudio tiene un alcance descriptivo y asociativo. Debido al diseño de cortes transversales repetidos, los resultados permitirán identificar diferencias, tendencias y asociaciones, pero no establecer relaciones causales entre educación, desigualdad de género y actitudes frente a la violencia de pareja.
-
-La base de datos de la Universidad Nacional de Loja se mantendrá separada y no formará parte del análisis estadístico de este artículo, debido a las diferencias entre poblaciones, instrumentos y objetivos de investigación.
+De esta manera, la investigación busca aportar evidencia sobre las actitudes estudiantiles frente a la violencia basada en género y su relación con determinadas características académicas y sociodemográficas, ofreciendo información que puede contribuir a futuras investigaciones y estrategias institucionales de prevención.
