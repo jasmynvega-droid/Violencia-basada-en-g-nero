@@ -1,17 +1,6 @@
 
 
 # Datos y variables
-
-## Fuente de información
-
-La presente investigación utiliza microdatos provenientes de una encuesta aplicada a estudiantes de la Universidad Nacional de Loja (UNL), orientada a recopilar información sobre sus características sociodemográficas, académicas y sus actitudes frente a la violencia basada en género.
-
-La base de datos original contiene 1.452 registros y 122 variables, que permiten caracterizar a la población encuestada y examinar posibles asociaciones entre las actitudes frente a la violencia basada en género y determinadas características de los estudiantes. Para el desarrollo del estudio se seleccionaron las variables relacionadas con el nivel de avance académico, el sexo, la edad, la facultad, la situación laboral, la clase social autopercibida y la procedencia territorial.
-
-La información constituye una fuente de datos de corte transversal, por lo que permite analizar las características y asociaciones observadas entre las variables, sin establecer relaciones causales ni evaluar cambios individuales a lo largo del tiempo.
-
-## Variables principales
-
 ```{r}
 
 #| include: false
@@ -23,11 +12,32 @@ library(ggplot2)
 library(knitr)
 library(kableExtra)
 
-ruta <- "C:/Users/Leander Gualan/OneDrive/Desktop/Git_hub/Violencia basada en género/datos/originales/V9_VBG_IES_5_UNL.sav"
+source("scripts/cargar_datos.R")
 
-base <- read_sav(ruta)
+n_registros <- nrow(base)
+n_variables <- ncol(base)
+
+validos_vbg <- sum(!is.na(base$VBG_INACEPT_B1_5))
+validos_nivel <- sum(!is.na(base$NIVEL_SEMSTRE))
+faltantes_nivel <- sum(is.na(base$NIVEL_SEMSTRE))
+
+n_analisis <- sum(complete.cases(
+  base[, c("VBG_INACEPT_B1_5", "NIVEL_SEMSTRE")]
+))
 
 ```
+
+## Fuente de información
+
+La presente investigación utiliza microdatos provenientes de una encuesta aplicada a estudiantes de la Universidad Nacional de Loja (UNL), orientada a recopilar información sobre sus características sociodemográficas, académicas y sus actitudes frente a la violencia basada en género.
+
+La base de datos original contiene 1.452 registros y 122 variables, que permiten caracterizar a la población encuestada y examinar posibles asociaciones entre las actitudes frente a la violencia basada en género y determinadas características de los estudiantes. Para el desarrollo del estudio se seleccionaron las variables relacionadas con el nivel de avance académico, el sexo, la edad, la facultad, la situación laboral, la clase social autopercibida y la procedencia territorial.
+
+La información constituye una fuente de datos de corte transversal, por lo que permite analizar las características y asociaciones observadas entre las variables, sin establecer relaciones causales ni evaluar cambios individuales a lo largo del tiempo.
+
+## Variables principales
+
+
 
 ```{r}
 #| echo: false
